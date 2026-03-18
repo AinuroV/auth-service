@@ -97,3 +97,55 @@ SERVER_PORT=8080
 
 ---
 
+## Тестирование API в Postman
+
+### 1. Регистрация
+**POST** `http://localhost:8080/api/auth/register`
+```json
+{
+    "email": "test@example.com",
+    "password": "Test123!@#"
+}
+```
+
+### 2. Вход в систему
+**POST** `http://localhost:8080/api/auth/login`
+```json
+{
+    "email": "test@example.com",
+    "password": "Test123!@#"
+}
+```
+
+### 3. Получение информации о пользователе
+**GET** `http://localhost:8080/api/auth/me`  
+**Headers:**
+```
+Authorization: Bearer <вставь_access_token_сюда>
+```
+
+### 4. Обновление токенов
+**POST** `http://localhost:8080/api/auth/refresh`
+```json
+{
+    "refresh_token": "<вставь_refresh_token_сюда>"
+}
+```
+
+### 5. Выход из системы
+**POST** `http://localhost:8080/api/auth/logout`
+```json
+{
+    "refresh_token": "<вставь_refresh_token_сюда>"
+}
+```
+
+
+
+### Ожидаемые статусы:
+- `200 OK` — успех
+- `201 Created` — создан новый пользователь
+- `400 Bad Request` — неверный формат
+- `401 Unauthorized` — не авторизован
+- `409 Conflict` — email уже существует
+- `404 Not Found` — несуществующий эндпоинт
